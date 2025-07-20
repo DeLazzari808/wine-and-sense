@@ -1,0 +1,102 @@
+/* MUDANÇA DE TEMA: Importando as novas fontes da referência */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+/* Diretivas base do Tailwind CSS. Essenciais para o funcionamento. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* MUDANÇA DE TEMA: Estilos base para o tema claro */
+body {
+  /* Define o fundo como branco, o texto como cinzento-escuro e a fonte principal como Montserrat */
+  @apply bg-white text-dark-gray font-body-sans antialiased;
+}
+
+body, html {
+  overflow-x: hidden;
+}
+
+/* Animação de fade-in para as secções */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estilo para a imagem de fundo do Hero */
+.hero-bg {
+  /* CRÍTICO: Certifique-se que tem uma imagem em public/assets/images/hero-background.jpg */
+  background-image: url('/assets/images/hero-background.jpg');
+  background-size: cover;
+  background-position: center center;
+  /* Animação de movimento subtil */
+  animation: kenburns 20s ease-out infinite;
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* --- NOVOS ESTILOS PARA O COVER FLOW --- */
+.coverflow-container {
+  perspective: 1200px;
+}
+
+.coverflow-item {
+  transform-style: preserve-3d;
+}
+
+/* --- ANIMAÇÕES CUSTOMIZADAS --- */
+@keyframes fade-slide-up {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-slide-down {
+  0% { opacity: 0; transform: translateY(-40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-slide-left {
+  0% { opacity: 0; transform: translateX(-40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes fade-slide-right {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes shadow-grow {
+  0% { box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08); }
+  100% { box-shadow: 0 8px 32px 0 rgba(122,58,143,0.18); }
+}
+
+.fade-slide-up { animation: fade-slide-up 0.8s cubic-bezier(.4,0,.2,1) both; }
+.fade-slide-down { animation: fade-slide-down 0.8s cubic-bezier(.4,0,.2,1) both; }
+.fade-slide-left { animation: fade-slide-left 0.8s cubic-bezier(.4,0,.2,1) both; }
+.fade-slide-right { animation: fade-slide-right 0.8s cubic-bezier(.4,0,.2,1) both; }
+.pulse-on-hover:hover { animation: pulse 0.5s; }
+.bounce-on-change { animation: bounce 0.5s; }
+.shadow-grow-on-hover:hover { animation: shadow-grow 0.4s forwards; }
+
+/* Delay helpers */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
