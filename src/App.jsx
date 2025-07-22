@@ -79,22 +79,47 @@ const PILLARS = [
 
 // Parceiros com popup group-hover CSS
 const PartnerCard = ({ partner }) => {
+  const [open, setOpen] = useState(false);
+  const cardRef = useRef(null);
+
+  // Fecha popup ao clicar fora
+  useEffect(() => {
+    if (!open) return;
+    function handleClick(e) {
+      if (cardRef.current && !cardRef.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [open]);
+
   return (
-    <div className="group relative flex flex-col items-center">
-      <div className="absolute bottom-full mb-3 w-64 sm:w-72 left-1/2 -translate-x-1/2 bg-white p-4 rounded-lg shadow-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto z-20 border border-medium-gray">
-        <h3 className="font-body-sans font-bold text-brand-purple mb-2 text-center">{partner.name}</h3>
-        <p className="font-body-sans text-sm text-text-gray mb-3 text-center">{partner.description}</p>
-        <div className="flex justify-center gap-4">
-          <a href={partner.site} target="_blank" rel="noopener noreferrer" className="text-brand-orange hover:text-brand-pink transition-colors"><ExternalLink size={20}/></a>
-          <a href={partner.instagram} target="_blank" rel="noopener noreferrer" className="text-brand-orange hover:text-brand-pink transition-colors">
-             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          </a>
+    <div ref={cardRef} className="relative flex flex-col items-center">
+      <button
+        className="bg-white p-6 rounded-lg shadow-md transition-all duration-500 flex justify-center items-center h-36 w-full hover:shadow-2xl hover:-translate-y-2 hover:scale-105 group focus:outline-none"
+        onClick={() => setOpen(true)}
+        aria-label={`Ver mais sobre ${partner.name}`}
+      >
+        <img
+          src={partner.logo}
+          alt={partner.name}
+          className="max-h-16 max-w-full object-contain transition-all duration-500 grayscale group-hover:grayscale-0"
+        />
+      </button>
+      {/* Popup customizado */}
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 animate-fade-in">
+          <div className="bg-white rounded-3xl shadow-2xl border-4 border-brand-purple max-w-md w-full p-8 relative flex flex-col items-center animate-fade-in">
+            <button onClick={() => setOpen(false)} className="absolute top-4 right-4 text-brand-purple text-2xl font-bold hover:text-brand-pink focus:outline-none">×</button>
+            <img src={partner.logo} alt={partner.name} className="max-h-28 max-w-full object-contain mb-4" />
+            <h3 className="font-title-script text-2xl text-brand-purple mb-2 text-center">{partner.name}</h3>
+            <p className="font-body-sans text-base text-text-gray mb-4 text-center">{partner.description}</p>
+            <div className="flex justify-center gap-6 mt-2">
+              <a href={partner.site} target="_blank" rel="noopener noreferrer" className="bg-brand-purple text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-pink transition-colors shadow-grow-on-hover">Site</a>
+              <a href={partner.instagram} target="_blank" rel="noopener noreferrer" className="bg-brand-pink text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-purple transition-colors shadow-grow-on-hover">Instagram</a>
+            </div>
+          </div>
         </div>
-        <div className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-white"></div>
-      </div>
-      <div className="bg-white p-6 rounded-lg shadow-md group-hover:shadow-xl transition-shadow duration-300 flex justify-center items-center h-36 w-full">
-        <img src={partner.logo} alt={partner.name} className="max-h-16 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300" />
-      </div>
+      )}
     </div>
   );
 };
@@ -133,7 +158,7 @@ export default function App() {
         {/* 3. O Ingresso Inclui */}
         <AnimatedSection id="inclui" className="py-24 bg-white">
           <div className="container mx-auto px-6 max-w-4xl">
-            <div className="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-gray-100">
+            <div className="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:scale-105">
                 <h2 className="font-title-script text-4xl text-center text-brand-purple mb-8">O Ingresso Inclui</h2>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 font-body-sans text-text-gray text-lg">
                     {CONFIG.includedItems.map((item, index) => (
@@ -221,7 +246,7 @@ export default function App() {
                 <a href={`tel:${CONFIG.contact.phone}`} className="hover:text-brand-purple transition-colors" aria-label="Telefone"><Phone/></a>
                 <a href={`mailto:${CONFIG.contact.email}`} className="hover:text-brand-purple transition-colors" aria-label="Email"><Mail/></a>
                 <a href={CONFIG.contact.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-brand-purple transition-colors" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
             </div>
           <p>&copy; {new Date().getFullYear()} Wine & Sense. Todos os direitos reservados.</p>

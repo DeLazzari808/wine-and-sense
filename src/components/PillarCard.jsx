@@ -3,7 +3,7 @@ import React from 'react';
 // Novo componente para os cards dos 4 pilares da experiência
 export default function PillarCard({ logos, icon, title, description, partners }) {
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col text-center items-center">
+    <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100 transition-all duration-500 flex flex-col text-center items-center hover:shadow-2xl hover:-translate-y-2 hover:scale-105 group">
       <div className="flex justify-center items-center gap-6 mb-6">
         {logos && logos.length > 0 ? (
           logos.map((logo, idx) => (
@@ -11,7 +11,7 @@ export default function PillarCard({ logos, icon, title, description, partners }
               key={logo}
               src={logo}
               alt={title + ' logo'}
-              className="h-20 w-auto object-contain rounded-md shadow-sm bg-white"
+              className="h-20 w-auto object-contain rounded-md shadow-sm bg-white transition-all duration-500 grayscale group-hover:grayscale-0"
               style={{ maxWidth: 96 }}
             />
           ))
