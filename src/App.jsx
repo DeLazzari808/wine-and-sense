@@ -4,6 +4,8 @@ import Header from './components/Header';
 import AnimatedSection from './components/AnimatedSection';
 import CoverFlowGallery from './components/CoverFlowGallery';
 import PillarCard from './components/PillarCard';
+import EventTimer from './components/EventTimer';
+import MasonryGallery from './components/MasonryGallery';
 
 // --- CONFIGURATION ---
 const CONFIG = {
@@ -106,7 +108,7 @@ export default function App() {
     <>
       <Header scrollTo={scrollTo} paymentLink={CONFIG.paymentLink} />
       <main>
-        {/* Hero sem card sobreposto */}
+        {/* 1. Hero */}
         <section id="home" className="h-screen min-h-[800px] flex flex-col items-center justify-center text-center p-4 relative overflow-hidden">
           {/* Vídeo de fundo */}
           <video
@@ -125,7 +127,10 @@ export default function App() {
           </div>
         </section>
 
-        {/* Card 'O Ingresso Inclui' em seção própria, centralizado, sem sobreposição */}
+        {/* 2. Contador regressivo */}
+        <EventTimer />
+
+        {/* 3. O Ingresso Inclui */}
         <AnimatedSection id="inclui" className="py-24 bg-white">
           <div className="container mx-auto px-6 max-w-4xl">
             <div className="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-gray-100">
@@ -143,7 +148,7 @@ export default function App() {
           </div>
         </AnimatedSection>
 
-        {/* Seção dos quatro pilares */}
+        {/* 4. Os 4 Pilares */}
         <AnimatedSection id="pilares" className="py-24 bg-light-gray">
           <div className="container mx-auto px-6">
             <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-12 text-center">Os 4 Pilares da Experiência</h2>
@@ -155,20 +160,19 @@ export default function App() {
           </div>
         </AnimatedSection>
 
-        {/* Respiro para compensar sobreposição do card */}
-        <div className="pt-48 md:pt-56 bg-white"></div>
-
-        <AnimatedSection id="galeria" className="py-20 md:py-24 bg-light-gray">
-            <div className="container mx-auto px-6">
-                <div className="text-center mb-12">
-                    <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-4">Momentos</h2>
-                    <p className="font-body-sans text-lg text-text-gray">Veja os sorrisos e as criações das nossas últimas edições.</p>
-                </div>
-                <CoverFlowGallery images={CONFIG.galleryImages} />
+        {/* 5. Galeria CoverFlow */}
+        <AnimatedSection id="galeria" className="py-20 md:py-24 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-12">
+              <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-4">Momentos Inesquecíveis</h2>
+              <p className="font-body-sans text-lg text-text-gray">Veja os sorrisos e as criações da nossa última edição.</p>
             </div>
+            <CoverFlowGallery images={CONFIG.galleryImages} />
+          </div>
         </AnimatedSection>
-        
-        <AnimatedSection id="proximo-evento" className="py-20 md:py-24">
+
+        {/* 6. Próximo Evento */}
+        <AnimatedSection id="proximo-evento" className="py-20 md:py-24 bg-light-gray">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
                      <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-4">Próximo Evento</h2>
@@ -197,7 +201,8 @@ export default function App() {
             </div>
         </AnimatedSection>
 
-        <AnimatedSection id="parceiros" className="py-20 md:py-24 bg-light-gray">
+        {/* 7. Parceiros */}
+        <AnimatedSection id="parceiros" className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 text-center">
             <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-12">Assinado por especialistas</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-10 items-start">
