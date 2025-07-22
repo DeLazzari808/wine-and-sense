@@ -1,0 +1,29 @@
+import React from 'react';
+
+// Novo componente para os cards dos 4 pilares da experiência
+export default function PillarCard({ logos, icon, title, description, partners }) {
+  return (
+    <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col text-center items-center">
+      <div className="flex justify-center items-center gap-6 mb-6">
+        {logos && logos.length > 0 ? (
+          logos.map((logo, idx) => (
+            <img
+              key={logo}
+              src={logo}
+              alt={title + ' logo'}
+              className="h-20 w-auto object-contain rounded-md shadow-sm bg-white"
+              style={{ maxWidth: 96 }}
+            />
+          ))
+        ) : icon ? (
+          <div className="bg-brand-pink text-white rounded-full p-4 flex items-center justify-center">
+            {React.createElement(icon, { size: 32, strokeWidth: 1.5 })}
+          </div>
+        ) : null}
+      </div>
+      <h3 className="font-title-script text-3xl text-brand-purple mb-4">{title}</h3>
+      <p className="font-body-sans text-text-gray mb-4 flex-grow">{description}</p>
+      <p className="font-body-sans font-bold text-brand-purple">{partners}</p>
+    </div>
+  );
+} 

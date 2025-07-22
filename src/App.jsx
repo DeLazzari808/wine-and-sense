@@ -1,9 +1,9 @@
-import React from 'react';
-import { MapPin, Clock, Calendar, Phone, Mail, ExternalLink, CheckCircle } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { MapPin, Clock, Calendar, Phone, Mail, ExternalLink, CheckCircle, Paintbrush, Wine, Utensils, Flower2 } from 'lucide-react';
 import Header from './components/Header';
 import AnimatedSection from './components/AnimatedSection';
 import CoverFlowGallery from './components/CoverFlowGallery';
-import { useState, useRef, useEffect } from 'react';
+import PillarCard from './components/PillarCard';
 
 // --- CONFIGURATION ---
 const CONFIG = {
@@ -23,17 +23,10 @@ const CONFIG = {
     { name: "Mondo Pane", logo: "/assets/logos/mondopane-logo.png", description: "Padaria artesanal e cafeteria, referência em pães de fermentação natural.", site: "https://mondopane.com.br", instagram: "https://instagram.com/mondopane" },
   ],
   galleryImages: [
-    "/assets/images/gallery-1.jpg",
-    "/assets/images/gallery-2.jpg",
-    "/assets/images/gallery-3.jpg",
-    "/assets/images/gallery-4.jpg",
-    "/assets/images/gallery-5.jpg",
-    "/assets/images/gallery-6.jpg",
-    "/assets/images/gallery-7.jpg",
-    "/assets/images/gallery-8.jpg",
-    "/assets/images/gallery-9.jpg",
-    "/assets/images/gallery-10.jpg",
-    "/assets/images/gallery-11.jpg",
+    "/assets/images/gallery-1.jpg", "/assets/images/gallery-2.jpg", "/assets/images/gallery-3.jpg",
+    "/assets/images/gallery-4.jpg", "/assets/images/gallery-5.jpg", "/assets/images/gallery-6.jpg",
+    "/assets/images/gallery-7.jpg", "/assets/images/gallery-8.jpg", "/assets/images/gallery-9.jpg",
+    "/assets/images/gallery-10.jpg", "/assets/images/gallery-11.jpg",
   ],
   includedItems: [
     "Oficina de pintura em taça com orientação artística",
@@ -50,47 +43,55 @@ const CONFIG = {
   }
 };
 
-// CORREÇÃO 2: Componente de Card de Parceiro refatorado para usar apenas CSS (group-hover)
-// PartnerCard com popup ao clique
+// Dados dos quatro pilares (ordem e logos conforme solicitado)
+const PILLARS = [
+  {
+    logos: [
+      '/assets/logos/mondopane-logo.png',
+      '/assets/logos/serafina-logo.png',
+    ],
+    title: 'Gastronomia',
+    description: 'Comidinhas leves, tábua de antepastos, prato principal e sobremesa para uma experiência completa.',
+    partners: 'com Mondo Pane e Serafina',
+  },
+  {
+    logos: ['/assets/logos/wineyes-logo.png'],
+    title: 'Vinho',
+    description: 'Degustação de vinhos selecionados, harmonizando sabores e criando novas memórias.',
+    partners: 'com Wineyes',
+  },
+  {
+    logos: ['/assets/logos/ssavon-logo.jpg'],
+    title: 'Aromas',
+    description: 'Ambientação sensorial com fragrância exclusiva e um presente especial ao final.',
+    partners: 'com Sagrado Savon',
+  },
+  {
+    icon: Paintbrush,
+    title: 'Arte',
+    description: 'Oficina de pintura em taça com orientação artística, estimulando a criatividade e a expressão.',
+    partners: 'Artistas convidados',
+  },
+];
+
+// Parceiros com popup group-hover CSS
 const PartnerCard = ({ partner }) => {
-  const [open, setOpen] = useState(false);
-  const cardRef = useRef(null);
-
-  // Fecha popup ao clicar fora
-  useEffect(() => {
-    if (!open) return;
-    function handleClick(e) {
-      if (cardRef.current && !cardRef.current.contains(e.target)) setOpen(false);
-    }
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, [open]);
-
   return (
-    <div className="relative flex flex-col items-center" ref={cardRef}>
-      {/* Card do parceiro */}
-      <button
-        className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex justify-center items-center h-40 w-full max-w-xs md:max-w-sm mb-4 focus:outline-none"
-        onClick={() => setOpen(true)}
-        aria-label={`Ver mais sobre ${partner.name}`}
-      >
-        <img src={partner.logo} alt={partner.name} className="max-h-24 max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300" />
-      </button>
-      {/* Popup customizado */}
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-3xl shadow-2xl border-4 border-brand-purple max-w-md w-full p-8 relative animate-fade-in flex flex-col items-center">
-            <button onClick={() => setOpen(false)} className="absolute top-4 right-4 text-brand-purple text-2xl font-bold hover:text-brand-pink focus:outline-none">×</button>
-            <img src={partner.logo} alt={partner.name} className="max-h-28 max-w-full object-contain mb-4" />
-            <h3 className="font-title-script text-2xl text-brand-purple mb-2 text-center">{partner.name}</h3>
-            <p className="font-body-sans text-base text-text-gray mb-4 text-center">{partner.description}</p>
-            <div className="flex justify-center gap-6 mt-2">
-              <a href={partner.site} target="_blank" rel="noopener noreferrer" className="bg-brand-purple text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-pink transition-colors shadow-grow-on-hover">Site</a>
-              <a href={partner.instagram} target="_blank" rel="noopener noreferrer" className="bg-brand-pink text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-purple transition-colors shadow-grow-on-hover">Instagram</a>
-            </div>
-          </div>
+    <div className="group relative flex flex-col items-center">
+      <div className="absolute bottom-full mb-3 w-64 sm:w-72 left-1/2 -translate-x-1/2 bg-white p-4 rounded-lg shadow-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto z-20 border border-medium-gray">
+        <h3 className="font-body-sans font-bold text-brand-purple mb-2 text-center">{partner.name}</h3>
+        <p className="font-body-sans text-sm text-text-gray mb-3 text-center">{partner.description}</p>
+        <div className="flex justify-center gap-4">
+          <a href={partner.site} target="_blank" rel="noopener noreferrer" className="text-brand-orange hover:text-brand-pink transition-colors"><ExternalLink size={20}/></a>
+          <a href={partner.instagram} target="_blank" rel="noopener noreferrer" className="text-brand-orange hover:text-brand-pink transition-colors">
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
         </div>
-      )}
+        <div className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-white"></div>
+      </div>
+      <div className="bg-white p-6 rounded-lg shadow-md group-hover:shadow-xl transition-shadow duration-300 flex justify-center items-center h-36 w-full">
+        <img src={partner.logo} alt={partner.name} className="max-h-16 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300" />
+      </div>
     </div>
   );
 };
@@ -104,33 +105,49 @@ export default function App() {
     <>
       <Header scrollTo={scrollTo} paymentLink={CONFIG.paymentLink} />
       <main>
-        <section id="home" className="h-screen min-h-[700px] flex flex-col items-center justify-center text-center p-4 pb-0 relative hero-bg">
+        {/* Hero sem card sobreposto */}
+        <section id="home" className="h-screen min-h-[800px] flex flex-col items-center justify-center text-center p-4 relative hero-bg">
           <div className="absolute inset-0 bg-black/30"></div>
-          <div className="relative z-10 flex flex-col items-center text-white">
-            <h1 className="font-title-script text-6xl sm:text-7xl md:text-8xl leading-tight mb-12 drop-shadow-lg fade-slide-up">Wine & Sense</h1>
-            <p className="font-body-sans text-lg md:text-xl max-w-2xl mb-12 drop-shadow-sm fade-slide-up delay-200">Uma experiência sensorial imersiva onde arte, gastronomia, vinhos e aromas se encontram para criar memórias afetivas.</p>
-            <a href="#proximo-evento" onClick={(e) => { e.preventDefault(); scrollTo('proximo-evento'); }} className="bg-brand-purple text-white font-bold py-4 px-10 rounded-full text-lg hover:bg-brand-pink transition-colors duration-300 shadow-lg">GARANTIR MINHA VAGA</a>
+          <div className="relative z-10 flex flex-col items-center text-white pt-24">
+            <h1 className="font-title-script text-6xl sm:text-7xl md:text-8xl leading-tight mb-4 drop-shadow-lg fade-slide-up">Wine & Sense</h1>
+            <p className="font-body-sans text-lg md:text-xl max-w-2xl mb-8 drop-shadow-sm fade-slide-up delay-200">Uma experiência sensorial imersiva onde arte, gastronomia, vinhos e aromas se encontram para criar memórias afetivas.</p>
+            <a href="#proximo-evento" onClick={(e) => { e.preventDefault(); scrollTo('proximo-evento'); }} className="bg-brand-purple text-white font-bold py-4 px-10 rounded-full text-lg hover:bg-brand-pink transition-colors duration-300 shadow-lg fade-slide-up delay-400 pulse-on-hover shadow-grow-on-hover">GARANTIR MINHA VAGA</a>
           </div>
         </section>
 
-        {/* CORREÇÃO: Card totalmente visível, sem invadir o Hero */}
-        <AnimatedSection id="included" className="pt-0 pb-20 md:pb-24">
-            <div className="container mx-auto px-6 max-w-4xl">
-                <div className="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-gray-100 mt-12 relative z-20">
-                    <h2 className="font-title-script text-4xl text-center text-brand-purple mb-8">O Ingresso Inclui</h2>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 font-body-sans text-text-gray text-lg">
-                        {CONFIG.includedItems.map((item, index) => (
-                            <li key={index} className="flex items-start">
-                                <CheckCircle className="text-brand-pink mr-3 mt-1 flex-shrink-0" size={20} />
-                                <span>{item}</span>
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="font-body-sans text-center text-xl text-brand-purple font-semibold mt-8">Tudo isso em uma noite pensada para despertar os sentidos e criar memórias! 🍷</p>
+        {/* Card 'O Ingresso Inclui' em seção própria, centralizado, sem sobreposição */}
+        <AnimatedSection id="inclui" className="py-24 bg-white">
+          <div className="container mx-auto px-6 max-w-4xl">
+            <div className="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-gray-100">
+                <h2 className="font-title-script text-4xl text-center text-brand-purple mb-8">O Ingresso Inclui</h2>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 font-body-sans text-text-gray text-lg">
+                    {CONFIG.includedItems.map((item, index) => (
+                        <li key={index} className="flex items-start">
+                            <CheckCircle className="text-brand-pink mr-3 mt-1 flex-shrink-0" size={20} />
+                            <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+                <p className="font-body-sans text-center text-xl text-brand-purple font-semibold mt-8">Tudo isso em uma noite pensada para despertar os sentidos e criar memórias! 🍷</p>
             </div>
           </div>
         </AnimatedSection>
-        
+
+        {/* Seção dos quatro pilares */}
+        <AnimatedSection id="pilares" className="py-24 bg-light-gray">
+          <div className="container mx-auto px-6">
+            <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-12 text-center">Os 4 Pilares da Experiência</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              {PILLARS.map((pillar, idx) => (
+                <PillarCard key={pillar.title} {...pillar} />
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* Respiro para compensar sobreposição do card */}
+        <div className="pt-48 md:pt-56 bg-white"></div>
+
         <AnimatedSection id="galeria" className="py-20 md:py-24 bg-light-gray">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
@@ -170,10 +187,10 @@ export default function App() {
             </div>
         </AnimatedSection>
 
-        <AnimatedSection id="parceiros" className="py-32 md:py-40 bg-light-gray">
+        <AnimatedSection id="parceiros" className="py-20 md:py-24 bg-light-gray">
           <div className="container mx-auto px-6 text-center">
-            <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-16">Assinado por especialistas</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 items-center justify-center">
+            <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-12">Assinado por especialistas</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 items-start">
               {CONFIG.partners.map((partner) => (
                 <PartnerCard key={partner.name} partner={partner} />
               ))}
@@ -189,7 +206,7 @@ export default function App() {
                 <a href={`tel:${CONFIG.contact.phone}`} className="hover:text-brand-purple transition-colors" aria-label="Telefone"><Phone/></a>
                 <a href={`mailto:${CONFIG.contact.email}`} className="hover:text-brand-purple transition-colors" aria-label="Email"><Mail/></a>
                 <a href={CONFIG.contact.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-brand-purple transition-colors" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
             </div>
           <p>&copy; {new Date().getFullYear()} Wine & Sense. Todos os direitos reservados.</p>
