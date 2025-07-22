@@ -23,6 +23,7 @@ const CONFIG = {
     { name: "Mondo Pane", logo: "/assets/logos/mondopane-logo.png", description: "Padaria artesanal e cafeteria, referência em pães de fermentação natural.", site: "https://mondopane.com.br", instagram: "https://instagram.com/mondopane" },
   ],
   galleryImages: [
+    "/assets/images/hero-background.jpg", // Adiciona a imagem antiga do Hero à galeria
     "/assets/images/gallery-1.jpg", "/assets/images/gallery-2.jpg", "/assets/images/gallery-3.jpg",
     "/assets/images/gallery-4.jpg", "/assets/images/gallery-5.jpg", "/assets/images/gallery-6.jpg",
     "/assets/images/gallery-7.jpg", "/assets/images/gallery-8.jpg", "/assets/images/gallery-9.jpg",
@@ -106,9 +107,18 @@ export default function App() {
       <Header scrollTo={scrollTo} paymentLink={CONFIG.paymentLink} />
       <main>
         {/* Hero sem card sobreposto */}
-        <section id="home" className="h-screen min-h-[800px] flex flex-col items-center justify-center text-center p-4 relative hero-bg">
-          <div className="absolute inset-0 bg-black/30"></div>
-          <div className="relative z-10 flex flex-col items-center text-white pt-24">
+        <section id="home" className="h-screen min-h-[800px] flex flex-col items-center justify-center text-center p-4 relative overflow-hidden">
+          {/* Vídeo de fundo */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover z-0"
+            src="/assets/videos/video-edicao-passada.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-black/30 z-10"></div>
+          <div className="relative z-20 flex flex-col items-center text-white pt-24">
             <h1 className="font-title-script text-6xl sm:text-7xl md:text-8xl leading-tight mb-4 drop-shadow-lg fade-slide-up">Wine & Sense</h1>
             <p className="font-body-sans text-lg md:text-xl max-w-2xl mb-8 drop-shadow-sm fade-slide-up delay-200">Uma experiência sensorial imersiva onde arte, gastronomia, vinhos e aromas se encontram para criar memórias afetivas.</p>
             <a href="#proximo-evento" onClick={(e) => { e.preventDefault(); scrollTo('proximo-evento'); }} className="bg-brand-purple text-white font-bold py-4 px-10 rounded-full text-lg hover:bg-brand-pink transition-colors duration-300 shadow-lg fade-slide-up delay-400 pulse-on-hover shadow-grow-on-hover">GARANTIR MINHA VAGA</a>
