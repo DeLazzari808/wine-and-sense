@@ -1,5 +1,24 @@
-/* MUDANÇA DE TEMA: Importando as novas fontes da referência */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+@font-face {
+  font-family: 'AboveTheBeyond';
+  src: url('/assets/fonts/above-the-beyond-script.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Balgin';
+  src: url('/assets/fonts/Fontspring-DEMO-balgin-regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Balgin';
+  src: url('/assets/fonts/Fontspring-DEMO-balgin-bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Diretivas base do Tailwind CSS. Essenciais para o funcionamento. */
 @tailwind base;
@@ -100,3 +119,11 @@ body, html {
 .delay-300 { animation-delay: 0.3s; }
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
+
+.font-title-script, .font-body-sans {
+  font-variant-ligatures: none;
+}
+.font-title-script [data-demo-char],
+.font-body-sans [data-demo-char] {
+  font-family: 'Montserrat', Arial, sans-serif !important;
+}
