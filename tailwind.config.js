@@ -7,9 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'title-script': ['AboveTheBeyond', 'cursive'],
-        'body-sans': ['Balgin', 'sans-serif'],
-        'title-serif': ['Playfair Display', 'serif'],
+        'title-script': ['Dancing Script', 'cursive'],
+        'body-sans': ['Nunito', 'sans-serif'],
       },
       colors: {
         'brand-blue': '#4186b7',

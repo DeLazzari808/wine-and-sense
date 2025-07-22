@@ -45,7 +45,7 @@ const CONFIG = {
   ],
   contact: {
     phone: "(11) 99999-9999",
-    email: "contato@wineandsense.com.br",
+    email: "wineesense@gmail.com",
     instagram: "https://www.instagram.com/wineesense",
   }
 };
