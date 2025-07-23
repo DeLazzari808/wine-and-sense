@@ -32,7 +32,7 @@ export default function EventTimer() {
   return (
     <AnimatedSection id="timer" className="py-16 bg-light-gray">
       <div className="container mx-auto px-6 text-center">
-        <h3 className="font-title-script text-3xl text-brand-purple mb-4">Uma experiência única com vagas limitadas</h3>
+        <h3 className="font-sans text-3xl font-light text-brand-purple mb-4">Uma experiência única com vagas limitadas</h3>
         <div className="flex justify-center gap-4 md:gap-8 my-6">
           {timerComponents.length ? (
             timerComponents.map(([interval, value]) => (
@@ -45,7 +45,7 @@ export default function EventTimer() {
             <span className="text-2xl font-bold text-brand-pink">As inscrições estão encerradas!</span>
           )}
         </div>
-        <p className="font-body-sans text-lg text-text-gray max-w-2xl mx-auto">A última edição esgotou rapidamente. Não perca a chance de despertar seus sentidos.</p>
+        <p className="font-sans text-lg font-light text-text-gray max-w-2xl mx-auto">A última edição esgotou rapidamente. Não perca a chance de despertar seus sentidos.</p>
       </div>
     </AnimatedSection>
   );

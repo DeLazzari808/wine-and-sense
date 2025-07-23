@@ -33,7 +33,7 @@ export default function Header({ scrollTo, paymentLink }) {
           </div>
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map(link => (
-              <button key={link.id} onClick={() => handleNavClick(link.id)} className="font-body-sans text-dark-gray hover:text-brand-purple transition-colors">
+              <button key={link.id} onClick={() => handleNavClick(link.id)} className="font-sans text-dark-gray hover:text-brand-purple transition-colors">
                 {link.label}
               </button>
             ))}
@@ -52,7 +52,7 @@ export default function Header({ scrollTo, paymentLink }) {
       <div className={`fixed top-0 right-0 h-full w-full bg-white z-40 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
         <div className="flex flex-col items-center justify-center h-full pt-20 space-y-8">
           {navLinks.map(link => (
-            <button key={link.id} onClick={() => handleNavClick(link.id)} className="font-body-sans text-dark-gray text-2xl hover:text-brand-purple transition-colors">
+            <button key={link.id} onClick={() => handleNavClick(link.id)} className="font-sans text-dark-gray text-2xl hover:text-brand-purple transition-colors">
               {link.label}
             </button>
           ))}

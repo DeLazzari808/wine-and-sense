@@ -21,9 +21,9 @@ export default function PillarCard({ logos, icon, title, description, partners }
           </div>
         ) : null}
       </div>
-      <h3 className="font-title-script text-3xl text-brand-purple mb-4">{title}</h3>
-      <p className="font-body-sans text-text-gray mb-4 flex-grow">{description}</p>
-      <p className="font-body-sans font-bold text-brand-purple">{partners}</p>
+      <h3 className="font-sans text-3xl font-bold text-brand-purple mb-4">{title}</h3>
+      <p className="font-sans text-text-gray mb-4 flex-grow font-light">{description}</p>
+      <p className="font-sans font-bold text-brand-purple">{partners}</p>
     </div>
   );
 } 

@@ -111,8 +111,8 @@ const PartnerCard = ({ partner }) => {
           <div className="bg-white rounded-3xl shadow-2xl border-4 border-brand-purple max-w-md w-full p-8 relative flex flex-col items-center animate-fade-in">
             <button onClick={() => setOpen(false)} className="absolute top-4 right-4 text-brand-purple text-2xl font-bold hover:text-brand-pink focus:outline-none">×</button>
             <img src={partner.logo} alt={partner.name} className="max-h-28 max-w-full object-contain mb-4" />
-            <h3 className="font-title-script text-2xl text-brand-purple mb-2 text-center">{partner.name}</h3>
-            <p className="font-body-sans text-base text-text-gray mb-4 text-center">{partner.description}</p>
+            <h3 className="font-sans text-2xl font-bold text-brand-purple mb-2 text-center">{partner.name}</h3>
+            <p className="font-sans text-base font-light text-text-gray mb-4 text-center">{partner.description}</p>
             <div className="flex justify-center gap-6 mt-2">
               <a href={partner.site} target="_blank" rel="noopener noreferrer" className="bg-brand-purple text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-pink transition-colors shadow-grow-on-hover">Site</a>
               <a href={partner.instagram} target="_blank" rel="noopener noreferrer" className="bg-brand-pink text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-purple transition-colors shadow-grow-on-hover">Instagram</a>
@@ -146,8 +146,8 @@ export default function App() {
           />
           <div className="absolute inset-0 bg-black/30 z-10"></div>
           <div className="relative z-20 flex flex-col items-center text-white pt-24">
-            <h1 className="font-title-script text-6xl sm:text-7xl md:text-8xl leading-tight mb-4 drop-shadow-lg fade-slide-up">Wine & Sense</h1>
-            <p className="font-body-sans text-lg md:text-xl max-w-2xl mb-8 drop-shadow-sm fade-slide-up delay-200">Uma experiência sensorial imersiva onde arte, gastronomia, vinhos e aromas se encontram para criar memórias afetivas.</p>
+            <h1 className="font-sans text-6xl sm:text-7xl md:text-8xl font-light leading-tight mb-4 drop-shadow-lg fade-slide-up">Wine & Sense</h1>
+            <p className="font-sans text-lg md:text-xl max-w-2xl mb-8 drop-shadow-sm fade-slide-up delay-200">Uma experiência sensorial imersiva onde arte, gastronomia, vinhos e aromas se encontram para criar memórias afetivas.</p>
             <a href="#proximo-evento" onClick={(e) => { e.preventDefault(); scrollTo('proximo-evento'); }} className="bg-brand-purple text-white font-bold py-4 px-10 rounded-full text-lg hover:bg-brand-pink transition-colors duration-300 shadow-lg fade-slide-up delay-400 pulse-on-hover shadow-grow-on-hover">GARANTIR MINHA VAGA</a>
           </div>
         </section>
@@ -159,8 +159,8 @@ export default function App() {
         <AnimatedSection id="inclui" className="py-24 bg-white">
           <div className="container mx-auto px-6 max-w-4xl">
             <div className="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:scale-105">
-                <h2 className="font-title-script text-4xl text-center text-brand-purple mb-8">O Ingresso Inclui</h2>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 font-body-sans text-text-gray text-lg">
+                <h2 className="font-sans text-4xl font-bold text-center text-brand-purple mb-8">O Ingresso Inclui</h2>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 font-sans text-text-gray text-lg font-light">
                     {CONFIG.includedItems.map((item, index) => (
                         <li key={index} className="flex items-start">
                             <CheckCircle className="text-brand-pink mr-3 mt-1 flex-shrink-0" size={20} />
@@ -168,43 +168,20 @@ export default function App() {
                         </li>
                     ))}
                 </ul>
-                <p className="font-body-sans text-center text-xl text-brand-purple font-semibold mt-8">Tudo isso em uma noite pensada para despertar os sentidos e criar memórias! 🍷</p>
+                <p className="font-sans text-center text-xl text-brand-purple font-semibold mt-8">Tudo isso em uma noite pensada para despertar os sentidos e criar memórias! 🍷</p>
             </div>
           </div>
         </AnimatedSection>
 
-        {/* 4. Os 4 Pilares */}
-        <AnimatedSection id="pilares" className="py-24 bg-light-gray">
-          <div className="container mx-auto px-6">
-            <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-12 text-center">Os 4 Pilares da Experiência</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-              {PILLARS.map((pillar, idx) => (
-                <PillarCard key={pillar.title} {...pillar} />
-              ))}
-            </div>
-          </div>
-        </AnimatedSection>
-
-        {/* 5. Galeria CoverFlow */}
-        <AnimatedSection id="galeria" className="py-20 md:py-24 bg-white">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-4">Momentos Inesquecíveis</h2>
-              <p className="font-body-sans text-lg text-text-gray">Veja os sorrisos e as criações da nossa última edição.</p>
-            </div>
-            <CoverFlowGallery images={CONFIG.galleryImages} />
-          </div>
-        </AnimatedSection>
-
-        {/* 6. Próximo Evento */}
+        {/* 4. Próximo Evento - MOVIDO PARA CÁ */}
         <AnimatedSection id="proximo-evento" className="py-20 md:py-24 bg-light-gray">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
-                     <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-4">Próximo Evento</h2>
+                     <h2 className="font-sans text-4xl md:text-5xl font-bold text-brand-purple mb-4">Próximo Evento</h2>
                 </div>
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h3 className="font-body-sans font-bold text-3xl text-dark-gray mb-4">{CONFIG.eventDetails.title}</h3>
+                        <h3 className="font-sans font-bold text-3xl text-dark-gray mb-4">{CONFIG.eventDetails.title}</h3>
                         <div className="space-y-4 text-text-gray text-lg mb-6">
                             <p className="flex items-center"><Calendar className="mr-3 text-brand-purple"/> {CONFIG.eventDetails.date}</p>
                             <p className="flex items-center"><Clock className="mr-3 text-brand-purple"/> {CONFIG.eventDetails.time}</p>
@@ -226,10 +203,33 @@ export default function App() {
             </div>
         </AnimatedSection>
 
+        {/* 5. Os 4 Pilares */}
+        <AnimatedSection id="pilares" className="py-24 bg-light-gray">
+          <div className="container mx-auto px-6">
+            <h2 className="font-sans text-4xl md:text-5xl font-bold text-brand-purple mb-12 text-center">Os 4 Pilares da Experiência</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              {PILLARS.map((pillar, idx) => (
+                <PillarCard key={pillar.title} {...pillar} />
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* 6. Galeria CoverFlow */}
+        <AnimatedSection id="galeria" className="py-20 md:py-24 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-12">
+              <h2 className="font-sans text-4xl md:text-5xl font-bold text-brand-purple mb-4">Momentos Inesquecíveis</h2>
+              <p className="font-sans text-lg font-light text-text-gray">Veja os sorrisos e as criações da nossa última edição.</p>
+            </div>
+            <CoverFlowGallery images={CONFIG.galleryImages} />
+          </div>
+        </AnimatedSection>
+
         {/* 7. Parceiros */}
         <AnimatedSection id="parceiros" className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 text-center">
-            <h2 className="font-title-script text-4xl md:text-5xl text-brand-purple mb-12">Assinado por especialistas</h2>
+            <h2 className="font-sans text-4xl md:text-5xl font-bold text-brand-purple mb-12">Assinado por especialistas</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-10 items-start">
               {CONFIG.partners.map((partner) => (
                 <PartnerCard key={partner.name} partner={partner} />
@@ -237,11 +237,22 @@ export default function App() {
             </div>
           </div>
         </AnimatedSection>
+
+        {/* 8. CTA Final antes do Footer */}
+        <AnimatedSection id="cta-final" className="py-20 bg-brand-purple text-white">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="font-sans text-3xl font-bold mb-4">Desperte seus sentidos com a gente!</h2>
+            <p className="font-sans max-w-2xl mx-auto mb-8">As vagas são limitadas e costumam esgotar. Garanta a sua agora.</p>
+            <a href={CONFIG.paymentLink} target="_blank" rel="noopener noreferrer" className="bg-white text-brand-purple font-bold py-4 px-10 rounded-full text-lg hover:bg-gray-200 transition-colors duration-300 shadow-lg inline-block pulse-on-hover">
+              RESERVAR MINHA VAGA
+            </a>
+          </div>
+        </AnimatedSection>
       </main>
 
       <footer className="bg-white py-12 border-t border-medium-gray">
-        <div className="container mx-auto px-6 text-center text-text-gray font-body-sans">
-            <h3 className="font-title-script text-2xl text-brand-purple mb-6">Fale Conosco</h3>
+        <div className="container mx-auto px-6 text-center text-text-gray font-sans">
+            <h3 className="font-sans text-2xl font-bold text-brand-purple mb-6">Fale Conosco</h3>
             <div className="flex justify-center items-center space-x-8 mb-6">
                 <a href={`tel:${CONFIG.contact.phone}`} className="hover:text-brand-purple transition-colors" aria-label="Telefone"><Phone/></a>
                 <a href={`mailto:${CONFIG.contact.email}`} className="hover:text-brand-purple transition-colors" aria-label="Email"><Mail/></a>

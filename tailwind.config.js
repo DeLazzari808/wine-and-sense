@@ -7,8 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'title-script': ['Dancing Script', 'cursive'],
-        'body-sans': ['Nunito', 'sans-serif'],
+        'sans': ['Montserrat', 'sans-serif'],
       },
       colors: {
         'brand-blue': '#4186b7',
