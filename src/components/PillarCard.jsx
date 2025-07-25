@@ -1,7 +1,10 @@
 import React from 'react';
 
 // Novo componente para os cards dos 4 pilares da experiência
-export default function PillarCard({ logos, icon, title, description, partners }) {
+export default function PillarCard({ logos, icon, title, description, partners, site, instagram }) {
+  // Identificadores para WineYes e Serafina
+  const isWineYes = partners && partners.toLowerCase().includes('wineyes');
+  const isSerafina = partners && partners.toLowerCase().includes('serafina');
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100 transition-all duration-500 flex flex-col text-center items-center hover:shadow-2xl hover:-translate-y-2 hover:scale-105 group">
       <div className="flex justify-center items-center gap-6 mb-6">

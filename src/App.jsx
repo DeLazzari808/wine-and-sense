@@ -9,7 +9,7 @@ import MasonryGallery from './components/MasonryGallery';
 
 // --- CONFIGURATION ---
 const CONFIG = {
-  paymentLink: "https://www.tagme.com.br/seu-evento-aqui", 
+  paymentLink: "https://reservation-widget.tagme.com.br/reservation/menuSelect/6880118a29d274428fa59e98", 
   eventDetails: {
     title: "Wine & Sense no Mondo Pane",
     date: "14 de Agosto",
@@ -40,9 +40,9 @@ const CONFIG = {
     "Um presente especial ao final ✨",
   ],
   contact: {
-    phone: "(11) 99999-9999",
+    phone: "+55 41 9993-5413",
     email: "wineesense@gmail.com",
-    instagram: "https://www.instagram.com/wineesense",
+    instagram: "https://www.instagram.com/wineandsense/",
   }
 };
 
@@ -56,18 +56,24 @@ const PILLARS = [
     title: 'Gastronomia',
     description: 'Comidinhas leves, tábua de antepastos, prato principal e sobremesa para uma experiência completa.',
     partners: 'com Mondo Pane e Serafina',
+    // Mondo Pane tem site e instagram, Serafina só Instagram
+    site: 'https://mondopane.com.br',
+    instagram: 'https://instagram.com/serafinabrasil',
   },
   {
     logos: ['/assets/logos/wineyes-logo.png'],
     title: 'Vinho',
     description: 'Degustação de vinhos selecionados, harmonizando sabores e criando novas memórias.',
-    partners: 'com Wineyes',
+    partners: 'com WineYes',
+    instagram: 'https://instagram.com/wineyesvinhos',
   },
   {
     logos: ['/assets/logos/ssavon-logo.jpg'],
     title: 'Aromas',
     description: 'Ambientação sensorial com fragrância exclusiva e um presente especial ao final.',
     partners: 'com Sagrado Savon',
+    site: 'https://sagradosavon.com.br',
+    instagram: 'https://instagram.com/sagradosavon',
   },
   {
     icon: Paintbrush,
@@ -114,8 +120,28 @@ const PartnerCard = ({ partner }) => {
             <h3 className="font-sans text-2xl font-bold text-brand-purple mb-2 text-center">{partner.name}</h3>
             <p className="font-sans text-base font-light text-text-gray mb-4 text-center">{partner.description}</p>
             <div className="flex justify-center gap-6 mt-2">
-              <a href={partner.site} target="_blank" rel="noopener noreferrer" className="bg-brand-purple text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-pink transition-colors shadow-grow-on-hover">Site</a>
-              <a href={partner.instagram} target="_blank" rel="noopener noreferrer" className="bg-brand-pink text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-purple transition-colors shadow-grow-on-hover">Instagram</a>
+               {(["wineyes", "serafina"]).includes(partner.name.toLowerCase()) ? (
+                 partner.instagram && (
+                   <a
+                     href={partner.instagram}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white transition-colors duration-200 shadow-sm"
+                     aria-label="Instagram"
+                   >
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                       <circle cx="17.5" cy="6.5" r="1"/>
+                     </svg>
+                   </a>
+                 )
+               ) : (
+                 <>
+                   {partner.site && <a href={partner.site} target="_blank" rel="noopener noreferrer" className="bg-brand-purple text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-pink transition-colors shadow-grow-on-hover">Site</a>}
+                   {partner.instagram && <a href={partner.instagram} target="_blank" rel="noopener noreferrer" className="bg-brand-pink text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-purple transition-colors shadow-grow-on-hover">Instagram</a>}
+                 </>
+               )}
             </div>
           </div>
         </div>
@@ -172,6 +198,7 @@ export default function App() {
             </div>
           </div>
         </AnimatedSection>
+        <div id="sobre"></div>
 
         {/* 4. Próximo Evento - MOVIDO PARA CÁ */}
         <AnimatedSection id="proximo-evento" className="py-20 md:py-24 bg-light-gray">
