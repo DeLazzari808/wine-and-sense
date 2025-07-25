@@ -22,7 +22,7 @@ const CONFIG = {
     { name: "Serafina", logo: "/assets/logos/serafina-logo.png", description: "Restaurante italiano tradicional, referência em massas frescas e ambiente acolhedor.", site: "https://serafinabrasil.com.br", instagram: "https://instagram.com/serafinabrasil" },
     { name: "Wineyes", logo: "/assets/logos/wineyes-logo.png", description: "Importadora e curadora de vinhos especiais, trazendo rótulos exclusivos para o Brasil.", site: "https://wineyes.com.br", instagram: "https://instagram.com/wineyesvinhos" },
     { name: "Sagrado Savon", logo: "/assets/logos/ssavon-logo.jpg", description: "Marca de cosméticos artesanais, focada em experiências sensoriais e aromas únicos.", site: "https://sagradosavon.com.br", instagram: "https://instagram.com/sagradosavon" },
-    { name: "Mondo Pane", logo: "/assets/logos/mondopane-logo.png", description: "Padaria artesanal e cafeteria, referência em pães de fermentação natural.", site: "https://mondopane.com.br", instagram: "https://instagram.com/mondopane" },
+    { name: "Mondo Pane", logo: "/assets/logos/mondopane-logo.png", description: "Padaria artesanal e cafeteria, referência em pães de fermentação natural.", site: "https://mondopane.com.br", instagram: "https://www.instagram.com/mondopane_oficial/" },
   ],
   galleryImages: [
     "/assets/images/hero-background.jpg", // Adiciona a imagem antiga do Hero à galeria
