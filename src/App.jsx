@@ -12,7 +12,7 @@ const CONFIG = {
   paymentLink: "https://reservation-widget.tagme.com.br/reservation/menuSelect/6880118a29d274428fa59e98", 
   eventDetails: {
     title: "Wine & Sense no Mondo Pane",
-    date: "14 de Agosto",
+    date: "28 de Agosto",
     time: "19h às 22h",
     location: "Mondo Pane, Al. Lorena, 473, Jardins",
     price: "R$ 320,00",

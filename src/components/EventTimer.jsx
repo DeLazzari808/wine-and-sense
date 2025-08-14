@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AnimatedSection from './AnimatedSection';
 
-const EVENT_DATE = "2025-08-14T19:00:00";
+const EVENT_DATE = "2025-08-28T19:00:00";
 
 export default function EventTimer() {
   const calculateTimeLeft = () => {
